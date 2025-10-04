@@ -4,7 +4,7 @@
 def test_import():
     """Test that the main module can be imported."""
     try:
-        import loxone_mcp
+        import loxone_mcp  # noqa: F401
         print("✓ Successfully imported loxone_mcp")
     except ImportError as e:
         print(f"✗ Failed to import loxone_mcp: {e}")
@@ -14,7 +14,7 @@ def test_server_creation():
     """Test that the server can be created."""
     try:
         from loxone_mcp.simple_server import create_server
-        server = create_server()
+        create_server()
         print("✓ Successfully created MCP server")
     except Exception as e:
         print(f"✗ Failed to create server: {e}")
