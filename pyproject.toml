@@ -27,6 +27,7 @@ dependencies = [
     "uvloop>=0.21.0",
     "ruff>=0.13.3",
     "black>=25.9.0",
+    "mypy>=1.18.2",
 ]
 
 [project.optional-dependencies]
