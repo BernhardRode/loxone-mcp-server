@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.10](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.9...v0.3.10) (2025-10-04)
+
+
+### Bug Fixes
+
+* id-token write ([fc2d049](https://github.com/BernhardRode/loxone-mcp-server/commit/fc2d049df823f0fbb778d093c9a4af32176f2e9f))
+* remove token ([dc68e0e](https://github.com/BernhardRode/loxone-mcp-server/commit/dc68e0e5f0f488b3d3a268df33f96288584dbe38))
+
 ## [0.3.9](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.8...v0.3.9) (2025-10-04)
 
 
