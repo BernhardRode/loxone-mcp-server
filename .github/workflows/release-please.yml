@@ -69,6 +69,15 @@ jobs:
           path: dist/
           retention-days: 7
 
+      # Check that basic features work and we didn't miss to include crucial files
+      - name: Smoke test (wheel)
+        if: ${{ steps.release.outputs.release_created }}
+        run: uv run --isolated --no-project --with dist/*.whl tests/smoke_test.py
+      
+      - name: Smoke test (source distribution)
+        if: ${{ steps.release.outputs.release_created }}
+        run: uv run --isolated --no-project --with dist/*.tar.gz tests/smoke_test.py
+
       - name: Upload release assets
         if: ${{ steps.release.outputs.release_created }}
         env:
@@ -76,3 +85,9 @@ jobs:
         run: |
           # Upload wheel and source distribution to the GitHub release
           gh release upload ${{ steps.release.outputs.tag_name }} dist/*.whl dist/*.tar.gz --clobber
+
+      - name: Publish to PyPI
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: uv publish
