@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.8](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.7...v0.3.8) (2025-10-04)
+
+
+### Bug Fixes
+
+* add pip ([ce9ec2f](https://github.com/BernhardRode/loxone-mcp-server/commit/ce9ec2f5d9f1a1620e3eb6b1915a7aadfd348271))
+
 ## [0.3.7](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.6...v0.3.7) (2025-10-04)
 
 
