@@ -14,14 +14,13 @@ def test_import():
 
 
 def test_server_creation():
-    """Test that the server can be created."""
+    """Test that the server module can be imported."""
     try:
-        from loxone_mcp.simple_server import create_server
-
-        create_server()
-        print("✓ Successfully created MCP server")
+        from loxone_mcp.simple_server import mcp
+        assert mcp is not None
+        print("✓ Successfully imported MCP server")
     except Exception as e:
-        print(f"✗ Failed to create server: {e}")
+        print(f"✗ Failed to import server: {e}")
         exit(1)
 
 
