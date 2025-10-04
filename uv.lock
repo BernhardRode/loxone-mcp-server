@@ -727,6 +727,7 @@ name = "loxone-mcp-server"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "black" },
     { name = "fastmcp" },
     { name = "httpx" },
     { name = "pycryptodome" },
@@ -748,6 +749,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "black", specifier = ">=25.9.0" },
     { name = "black", marker = "extra == 'dev'", specifier = ">=24.0.0" },
     { name = "fastmcp", specifier = ">=0.9.0" },
     { name = "httpx", specifier = ">=0.27.0" },
