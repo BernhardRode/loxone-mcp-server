@@ -27,3 +27,7 @@ custom_components/loxone/homeassistant
 .vscode
 loxone_token.json
 coverage.xml
+
+.mypy_cache 
+.pytest_cache 
+.ruff_cache
