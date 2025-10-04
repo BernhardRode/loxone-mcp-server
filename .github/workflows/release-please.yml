@@ -81,6 +81,4 @@ jobs:
       # ✅ Publish to PyPI after successful release
       - name: Publish to PyPI
         if: ${{ steps.release.outputs.release_created }}
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: uv publish
