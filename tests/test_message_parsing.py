@@ -13,7 +13,7 @@ Tests cover:
 import json
 import struct
 import uuid
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 import pytest
 
 from loxone_mcp.loxone_client import (
@@ -21,7 +21,6 @@ from loxone_mcp.loxone_client import (
     MessageType,
     check_and_decode_if_needed,
     detect_encoding,
-    ConnectionState,
 )
 from loxone_mcp.config import LoxoneConfig
 
@@ -447,7 +446,6 @@ class TestTextStatesParsing:
         # Create test data with empty text
         test_uuid = uuid.uuid4()
         icon_uuid = uuid.uuid4()
-        test_text = ""
         
         # Create binary message
         message = b''

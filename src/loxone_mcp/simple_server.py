@@ -21,7 +21,6 @@ Usage:
     uv run python src/loxone_mcp/simple_server.py
 """
 
-import asyncio
 import logging
 import os
 from pathlib import Path
@@ -88,7 +87,6 @@ async def loxone_list_devices(
     try:
         # Import here to avoid import issues when running as script
         import sys
-        import os
         from pathlib import Path
         
         # Add the parent directory to path for imports
@@ -233,7 +231,6 @@ async def loxone_get_device_state(
     try:
         # Import here to avoid import issues when running as script
         import sys
-        import os
         from pathlib import Path
         
         # Add the parent directory to path for imports
@@ -367,7 +364,6 @@ async def loxone_test_connection(
     try:
         # Import here to avoid import issues when running as script
         import sys
-        import os
         from pathlib import Path
         
         # Add the parent directory to path for imports

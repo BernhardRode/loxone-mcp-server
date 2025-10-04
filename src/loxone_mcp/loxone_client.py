@@ -16,7 +16,7 @@ import uuid
 from base64 import b64encode
 from datetime import datetime
 from enum import Enum
-from math import floor
+import struct
 from struct import unpack
 from typing import Callable, Optional, Dict, Any
 
@@ -136,7 +136,7 @@ def check_and_decode_if_needed(message):
         try:
             return message.decode("utf-8")
         except UnicodeDecodeError:
-            logger.debug(f"Decoding problem for message, trying to detect encoding...")
+            logger.debug("Decoding problem for message, trying to detect encoding...")
             encoding = detect_encoding(message)
             if encoding:
                 return message.decode(encoding)
@@ -787,7 +787,6 @@ class LoxoneClient:
         Returns:
             Dictionary mapping UUID strings to daytimer values
         """
-        event_dict = {}
         
         try:
             # For now, treat daytimer states similar to value states
@@ -815,7 +814,6 @@ class LoxoneClient:
         Returns:
             Dictionary mapping UUID strings to weather values
         """
-        event_dict = {}
         
         try:
             # Weather states may have variable structure

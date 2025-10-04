@@ -6,13 +6,12 @@ methods for all device types. Each session represents a single client
 connection with its own state and Loxone Miniserver connection.
 """
 
-import asyncio
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 from .config import LoxoneConfig
 from .loxone_client import LoxoneClient
-from .device_manager import DeviceManager, LoxoneDevice
+from .device_manager import DeviceManager
 
 logger = logging.getLogger(__name__)
 

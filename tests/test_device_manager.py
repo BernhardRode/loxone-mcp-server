@@ -11,18 +11,12 @@ Tests cover:
 """
 
 import pytest
-from unittest.mock import Mock, patch
 from threading import Thread
 import time
 
 from loxone_mcp.device_manager import (
     DeviceManager,
     LoxoneDevice,
-    SUPPORTED_DEVICE_TYPES,
-    DEVICE_TYPE_SWITCH,
-    DEVICE_TYPE_DIMMER,
-    DEVICE_TYPE_JALOUSIE,
-    SCENE_TYPE,
 )
 
 
@@ -557,7 +551,7 @@ class TestDeviceManagerStateManagement:
         manager.update_state("device-1", {"active": True})
         device = manager.get_device("device-1")
         assert device.states["position"] == 50
-        assert device.states["active"] == True
+        assert device.states["active"]
         assert "_created_at" in device.states
         assert "_last_updated" in device.states
         assert "_reachable" in device.states
@@ -566,7 +560,7 @@ class TestDeviceManagerStateManagement:
         manager.update_state("device-1", {"position": 75, "brightness": 80})
         device = manager.get_device("device-1")
         assert device.states["position"] == 75
-        assert device.states["active"] == True
+        assert device.states["active"]
         assert device.states["brightness"] == 80
         assert "_created_at" in device.states
         assert "_last_updated" in device.states

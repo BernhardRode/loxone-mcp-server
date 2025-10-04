@@ -8,14 +8,12 @@ Loxone server, making it a reliable replacement for the problematic integration 
 This provides end-to-end testing of the MCP protocol without external dependencies.
 """
 
-import asyncio
-import json
 import logging
 import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List
-from unittest.mock import AsyncMock, patch, MagicMock
+from unittest.mock import patch, MagicMock
 
 # Add src to path for standalone execution
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
@@ -36,7 +34,6 @@ try:
         ERROR_INVALID_PARAMETER
     )
     from src.loxone_mcp.device_manager import DeviceManager, LoxoneDevice
-    from src.loxone_mcp.client_session import ClientSession as LoxoneClientSession
 except ImportError:
     # Try alternative import for standalone execution
     import loxone_mcp.server as server_module
@@ -48,7 +45,6 @@ except ImportError:
     ERROR_INVALID_PARAMETER = server_module.ERROR_INVALID_PARAMETER
     
     from loxone_mcp.device_manager import DeviceManager, LoxoneDevice
-    from loxone_mcp.client_session import ClientSession as LoxoneClientSession
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

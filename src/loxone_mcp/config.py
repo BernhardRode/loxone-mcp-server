@@ -8,7 +8,7 @@ and manages token persistence for authentication.
 import json
 import logging
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 

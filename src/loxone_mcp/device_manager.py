@@ -5,7 +5,6 @@ Handles device discovery, registration, state management, and querying.
 Provides a centralized registry for all Loxone devices and their states.
 """
 
-import asyncio
 import logging
 from dataclasses import dataclass, field
 from threading import RLock
