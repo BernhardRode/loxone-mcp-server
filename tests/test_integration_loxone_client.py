@@ -14,8 +14,9 @@ import asyncio
 import os
 import pytest
 import logging
+import websockets
 from unittest.mock import AsyncMock, Mock, patch
-from src.loxone_mcp.loxone_client import LoxoneClient, ConnectionState, MessageType
+from src.loxone_mcp.loxone_client import LoxoneClient, ConnectionState
 from src.loxone_mcp.config import LoxoneConfig
 
 # Configure logging for integration tests

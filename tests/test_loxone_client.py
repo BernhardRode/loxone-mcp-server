@@ -6,7 +6,7 @@ Following TDD principles with async/await and pytest-asyncio.
 
 import pytest
 import asyncio
-from unittest.mock import Mock, AsyncMock, patch, MagicMock
+from unittest.mock import Mock, AsyncMock, patch
 from src.loxone_mcp.loxone_client import (
     LoxoneClient,
     ConnectionState,

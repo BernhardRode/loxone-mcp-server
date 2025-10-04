@@ -8,7 +8,6 @@ Supports multiple clients with different credentials connecting to different Min
 Run with: uv run loxone-mcp-server
 """
 
-import asyncio
 import logging
 from contextlib import asynccontextmanager
 from typing import Any, Optional
@@ -800,14 +799,10 @@ async def loxone_send_command(client_id: str = "default", uuid: str = "", value:
                 details={
                     "uuid": uuid,
                     "command": value,
-                    "device_name": device.name,
                     "exception_type": type(e).__name__
                 },
                 context={"operation": "miniserver_communication"}
             )
-        
-    except Exception as e:
-        error_msg = f"Unexpected error sending command: {e}"
         logger.error(error_msg, exc_info=True)
         return create_error_response(
             ERROR_COMMAND_FAILED,
@@ -919,70 +914,6 @@ async def loxone_set_switch(client_id: str = "default", uuid: str = "", state: b
                 result.get("error", "Switch control failed"),
                 details={"uuid": uuid, "state": state},
                 context={"client_id": client_id}
-            )
-        value = "On" if state else "Off"
-        
-        logger.debug(f"Converting switch command - State: {state} -> Command: {value}")
-        logger.debug(f"Target device: '{device.name}' ({device.type}) in {device.room}")
-        
-        # Send command to Miniserver
-        try:
-            success = await loxone_client.send_command(uuid, value)
-            
-            if success:
-                logger.info(f"Switch '{device.name}' turned {'ON' if state else 'OFF'} successfully")
-                return create_success_response({
-                    "device": uuid,
-                    "state": state,
-                    "command_sent": value,
-                    "device_name": device.name,
-                    "device_type": device.type,
-                    "room": device.room
-                }, context={
-                    "switch_operation": "successful",
-                    "previous_state": "unknown",  # We don't track previous state
-                    "device_info": {
-                        "type": device.type,
-                        "room": device.room,
-                        "category": device.category
-                    }
-                })
-            else:
-                error_msg = f"Failed to turn switch '{device.name}' {'on' if state else 'off'}"
-                logger.warning(error_msg)
-                return create_error_response(
-                    ERROR_COMMAND_FAILED,
-                    error_msg,
-                    details={
-                        "uuid": uuid,
-                        "requested_state": state,
-                        "command_sent": value,
-                        "device_name": device.name,
-                        "device_type": device.type
-                    },
-                    context={
-                        "possible_causes": [
-                            "Switch may be offline or unresponsive",
-                            "Network connectivity issues",
-                            "Device may be in manual override mode",
-                            "Miniserver communication error"
-                        ]
-                    }
-                )
-                
-        except Exception as e:
-            error_msg = f"Error communicating with Miniserver for switch operation: {e}"
-            logger.error(f"Communication error setting switch {uuid}: {e}", exc_info=True)
-            return create_error_response(
-                ERROR_CONNECTION_FAILED,
-                error_msg,
-                details={
-                    "uuid": uuid,
-                    "requested_state": state,
-                    "device_name": device.name,
-                    "exception_type": type(e).__name__
-                },
-                context={"operation": "switch_miniserver_communication"}
             )
         
     except Exception as e:

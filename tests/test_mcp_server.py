@@ -5,7 +5,6 @@ Following TDD practices with pytest and async testing.
 """
 
 import pytest
-import asyncio
 from unittest.mock import AsyncMock, patch
 from fastmcp import Client
 from pathlib import Path

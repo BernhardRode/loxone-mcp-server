@@ -13,15 +13,13 @@ Tests cover:
 import binascii
 import hashlib
 import json
-import struct
-from base64 import b64encode, b64decode
-from unittest.mock import Mock, patch, AsyncMock
+from base64 import b64decode
+from unittest.mock import AsyncMock
 import pytest
 
 from Crypto.Cipher import AES, PKCS1_v1_5
 from Crypto.Hash import HMAC, SHA1, SHA256
 from Crypto.PublicKey import RSA
-from Crypto.Random import get_random_bytes
 from Crypto.Util import Padding
 
 from loxone_mcp.loxone_client import (
@@ -34,7 +32,6 @@ from loxone_mcp.loxone_client import (
     ConnectionState,
     IV_BYTES,
     AES_KEY_SIZE,
-    SALT_BYTES,
     SALT_MAX_AGE_SECONDS,
     SALT_MAX_USE_COUNT,
 )
@@ -810,7 +807,6 @@ class TestVisualHashComputation:
         pin_code = "1234"
         salt = "testsalt123"
         key = "abcdef1234567890"
-        hash_alg = "SHA1"
         
         # Compute hash manually
         pwd_hash_str = f"{pin_code}:{salt}"
