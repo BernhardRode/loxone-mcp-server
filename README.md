@@ -189,19 +189,27 @@ The server provides these tools for AI assistants. **All tools require Miniserve
 
 ## Development
 
-### Running Tests
+### Setup Development Environment
 
 ```bash
-# Run all tests
-uv run pytest
+# Install dependencies
+uv pip install -e ".[dev]"
 
-# Run with coverage  
-uv run pytest --cov=src/loxone_mcp
+# Setup pre-commit hooks (optional but recommended)
+make setup-pre-commit
+```
 
-# Format and lint
-uv run black src/ tests/
-uv run ruff check src/ tests/
-uv run mypy src/
+### Running Tests and Checks
+
+```bash
+# Run all CI checks locally
+make ci-check
+
+# Individual commands
+make test          # Run tests with coverage
+make lint          # Check code with ruff
+make format        # Format code with black
+make type-check    # Type check with mypy
 ```
 
 ### Testing with Real Miniserver
