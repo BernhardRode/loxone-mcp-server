@@ -260,9 +260,15 @@ jobs:
 
       # Optional: Publish to PyPI (if PyPI token is configured)
       - name: Publish to PyPI
-        if: ${{ steps.release.outputs.release_created && secrets.PYPI_API_TOKEN }}
+        if: steps.release.outputs.release_created
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          uv publish --token ${{ secrets.PYPI_API_TOKEN }}
+          if [ -n "$PYPI_API_TOKEN" ]; then
+            uv publish --token $PYPI_API_TOKEN
+          else
+            echo "PYPI_API_TOKEN not configured, skipping PyPI publication"
+          fi
 
   notify-result:
     runs-on: ubuntu-latest
