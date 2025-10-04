@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.9](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.8...v0.3.9) (2025-10-04)
+
+
+### Bug Fixes
+
+* remove token ([7e8a384](https://github.com/BernhardRode/loxone-mcp-server/commit/7e8a3849946e2d353d5521e7f7a42af090ca0326))
+
 ## [0.3.8](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.7...v0.3.8) (2025-10-04)
 
 
