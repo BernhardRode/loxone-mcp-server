@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.2...v0.3.3) (2025-10-04)
+
+
+### Bug Fixes
+
+* no second publish ([cbcf532](https://github.com/BernhardRode/loxone-mcp-server/commit/cbcf5320df46380a4b9d120d58f54a8e2efcef74))
+
 ## [0.3.2](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.1...v0.3.2) (2025-10-04)
 
 
