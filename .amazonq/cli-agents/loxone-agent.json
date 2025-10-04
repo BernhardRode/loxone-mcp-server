@@ -1,0 +1,55 @@
+{
+  "name": "loxone-smart-home",
+  "description": "Smart home automation agent with Loxone Miniserver integration",
+  "mcpServers": {
+    "loxone": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        ".",
+        "run",
+        "loxone-mcp-server"
+      ],
+      "transport": "stdio",
+      "env": {
+        "LOG_LEVEL": "INFO"
+      },
+      "timeout": 30000
+    }
+  },
+  "tools": [
+    "fs_read",
+    "fs_write", 
+    "execute_bash",
+    "@loxone"
+  ],
+  "allowedTools": [
+    "fs_read",
+    "@loxone/loxone_list_devices",
+    "@loxone/loxone_get_device_state",
+    "@loxone/loxone_set_switch",
+    "@loxone/loxone_set_dimmer",
+    "@loxone/loxone_trigger_scene"
+  ],
+  "toolsSettings": {
+    "fs_write": {
+      "allowedPaths": ["./config/**", "./logs/**", "./tokens/**"]
+    },
+    "execute_bash": {
+      "allowedCommands": ["uv run loxone-mcp-server --help", "uv run loxone-mcp-server --test-connection"],
+      "allowReadOnly": true
+    }
+  },
+  "resources": [
+    "file://README.md",
+    "file://.env.example",
+    "file://docs/**/*.md"
+  ],
+  "hooks": {
+    "agentSpawn": [
+      {
+        "command": "echo 'Loxone Smart Home Agent initialized'"
+      }
+    ]
+  }
+}

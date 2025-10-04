@@ -1,0 +1,78 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
+      upload_url: ${{ steps.release.outputs.upload_url }}
+    steps:
+      - name: Run release-please
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          release-type: python
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # UV build steps - only run when release is created
+      - name: Checkout code
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install UV
+        if: ${{ steps.release.outputs.release_created }}
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.release_created }}
+        run: uv sync --frozen
+
+      - name: Build package with UV
+        if: ${{ steps.release.outputs.release_created }}
+        run: uv build --wheel --sdist
+
+      - name: Validate build artifacts
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          # Check that both wheel and source distribution were created
+          ls -la dist/
+          # Verify wheel can be installed
+          python -m pip install dist/*.whl --dry-run --quiet
+          # Check that source distribution contains expected files
+          tar -tzf dist/*.tar.gz | head -10
+
+      - name: Store build artifacts
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+          retention-days: 7
+
+      - name: Upload release assets
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Upload wheel and source distribution to the GitHub release
+          gh release upload ${{ steps.release.outputs.tag_name }} dist/*.whl dist/*.tar.gz --clobber

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "loxone": {
+      "command": "uv",
+      "args": [
+        "--directory", 
+        "/absolute/path/to/your/PyLoxone", 
+        "run", 
+        "loxone-mcp-server"
+      ]
+    }
+  }
+}
