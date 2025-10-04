@@ -12,6 +12,8 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
@@ -76,7 +78,7 @@ jobs:
 
       - name: Smoke test (source distribution)
         if: ${{ steps.release.outputs.release_created }}
-        run: uv run --isolated --no-project --with dist/*.tar.gz tests/smoke_test.py
+        run: uv run --isolated --no-project --with dist/*.tar.gz tests/smoke_test.python
 
       # ✅ Publish to PyPI after successful release
       - name: Publish to PyPI
