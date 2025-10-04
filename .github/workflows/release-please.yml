@@ -34,18 +34,16 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        if: ${{ steps.release.outputs.release_created }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
       - name: Install UV
         if: ${{ steps.release.outputs.release_created }}
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v6
         with:
+          activate-environment: true
           enable-cache: true
           cache-dependency-glob: "uv.lock"
+
+      - name: Install Python 3.13
+        run: uv python install 3.13
 
       - name: Install dependencies
         if: ${{ steps.release.outputs.release_created }}
