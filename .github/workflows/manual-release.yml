@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       release-type:
-        description: 'Type of release to create'
+        description: "Type of release to create"
         required: true
-        default: 'patch'
+        default: "patch"
         type: choice
         options:
           - patch
@@ -33,18 +33,18 @@ jobs:
         run: |
           # Check if the user has write permissions to the repository
           echo "Checking permissions for user: ${{ github.actor }}"
-          
+
           # Block automated accounts from triggering manual releases
           if [[ "${{ github.actor }}" == "dependabot[bot]" ]] || [[ "${{ github.actor }}" == "github-actions[bot]" ]]; then
             echo "can_release=false" >> $GITHUB_OUTPUT
             echo "❌ Automated accounts cannot trigger manual releases"
             exit 1
           fi
-          
+
           # Check if user has write access to the repository
           # This uses the GitHub CLI to check repository permissions
           user_permission=$(gh api repos/${{ github.repository }}/collaborators/${{ github.actor }}/permission --jq '.permission' 2>/dev/null || echo "none")
-          
+
           case "$user_permission" in
             admin|write)
               echo "✅ User has sufficient permissions: $user_permission"
@@ -79,16 +79,16 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Checking for existing release PRs..."
-          
+
           # Check for release-please PRs (multiple possible patterns)
           release_pr_patterns=(
             "chore(main): release"
             "chore: release"
             "release:"
           )
-          
+
           total_open_prs=0
-          
+
           for pattern in "${release_pr_patterns[@]}"; do
             echo "Checking for PRs matching pattern: $pattern"
             open_prs=$(gh pr list --state open --author "github-actions[bot]" --search "$pattern" --json number,title,url 2>/dev/null || echo "[]")
@@ -100,18 +100,18 @@ jobs:
               total_open_prs=$((total_open_prs + pr_count))
             fi
           done
-          
+
           # Also check for any PRs with "release" in the title from release-please bot
           echo "Checking for any release-related PRs from github-actions[bot]..."
           other_release_prs=$(gh pr list --state open --author "github-actions[bot]" --json number,title,url | jq '[.[] | select(.title | test("release"; "i"))]')
           other_pr_count=$(echo "$other_release_prs" | jq length)
-          
+
           if [[ $other_pr_count -gt 0 ]]; then
             echo "Found $other_pr_count additional release-related PR(s):"
             echo "$other_release_prs" | jq -r '.[] | "  - #\(.number): \(.title) (\(.url))"'
             total_open_prs=$((total_open_prs + other_pr_count))
           fi
-          
+
           if [[ $total_open_prs -gt 0 ]]; then
             echo "has_open_pr=true" >> $GITHUB_OUTPUT
             echo ""
@@ -137,7 +137,7 @@ jobs:
       - name: Validate release type input
         run: |
           echo "Validating release type input: '${{ github.event.inputs.release-type }}'"
-          
+
           # Validate that release-type is one of the allowed values
           case "${{ github.event.inputs.release-type }}" in
             patch)
@@ -161,7 +161,7 @@ jobs:
               exit 1
               ;;
           esac
-          
+
           echo "Release type validation passed"
 
       - name: Validate repository state
@@ -169,7 +169,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Validating repository state for manual release..."
-          
+
           # Check if we're on the main branch
           current_branch=$(git branch --show-current)
           if [[ "$current_branch" != "main" ]]; then
@@ -177,7 +177,7 @@ jobs:
             echo "Current branch: $current_branch"
             exit 1
           fi
-          
+
           # Check if there are any uncommitted changes
           if ! git diff --quiet; then
             echo "❌ Repository has uncommitted changes"
@@ -185,7 +185,7 @@ jobs:
             git status --porcelain
             exit 1
           fi
-          
+
           # Check if the working directory is clean
           if ! git diff --cached --quiet; then
             echo "❌ Repository has staged but uncommitted changes"
@@ -193,7 +193,7 @@ jobs:
             git status --porcelain
             exit 1
           fi
-          
+
           echo "✅ Repository state validation passed"
 
       - name: Run manual release-please
@@ -215,7 +215,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.12"
 
       - name: Install UV
         if: ${{ steps.release.outputs.release_created }}
@@ -291,3 +291,4 @@ jobs:
             echo "ℹ️ Manual release completed but no release was created"
             echo "This may happen if there are no releasable changes since the last release"
           fi
+
