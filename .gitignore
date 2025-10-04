@@ -26,3 +26,4 @@ __pycache__
 custom_components/loxone/homeassistant
 .vscode
 loxone_token.json
+coverage.xml
