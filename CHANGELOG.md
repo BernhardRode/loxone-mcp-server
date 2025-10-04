@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.4](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.3...v0.3.4) (2025-10-04)
+
+
+### Bug Fixes
+
+* add pypi env ([cfda4cd](https://github.com/BernhardRode/loxone-mcp-server/commit/cfda4cd841e311268e3a43e9fdd00842a4532b37))
+* only pcython 3.13 ([8ea0127](https://github.com/BernhardRode/loxone-mcp-server/commit/8ea01276a1800067f39a1d2a362c9c47a98fc814))
+
 ## [0.3.3](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.2...v0.3.3) (2025-10-04)
 
 
