@@ -29,10 +29,7 @@ from Crypto.Random import get_random_bytes
 from Crypto.Util import Padding
 from websockets.protocol import State
 
-try:
-    from .config import LoxoneConfig
-except ImportError:
-    from config import LoxoneConfig
+from .config import LoxoneConfig
 
 logger = logging.getLogger(__name__)
 
@@ -256,7 +253,7 @@ class LoxoneClient:
         self._load_persisted_token()
 
         # WebSocket
-        self._ws: Optional[websockets.WebSocketClientProtocol] = None
+        self._ws: Optional[Any] = None
         self._current_message_type: Optional[MessageType] = None
 
         # Connection state

@@ -94,9 +94,9 @@ async def loxone_list_devices(
         if str(parent_dir) not in sys.path:
             sys.path.insert(0, str(parent_dir))
 
-        from config import LoxoneConfig
-        from loxone_client import LoxoneClient
-        from device_manager import DeviceManager
+        from .config import LoxoneConfig
+        from .loxone_client import LoxoneClient
+        from .device_manager import DeviceManager
 
         # Use environment variables as primary source, parameters as override
         try:
@@ -230,9 +230,9 @@ async def loxone_get_device_state(
         if str(parent_dir) not in sys.path:
             sys.path.insert(0, str(parent_dir))
 
-        from config import LoxoneConfig
-        from loxone_client import LoxoneClient
-        from device_manager import DeviceManager
+        from .config import LoxoneConfig
+        from .loxone_client import LoxoneClient
+        from .device_manager import DeviceManager
 
         # Use environment variables as primary source, parameters as override
         try:
@@ -359,8 +359,8 @@ async def loxone_test_connection(
         if str(parent_dir) not in sys.path:
             sys.path.insert(0, str(parent_dir))
 
-        from config import LoxoneConfig
-        from loxone_client import LoxoneClient
+        from .config import LoxoneConfig
+        from .loxone_client import LoxoneClient
 
         # Use environment variables as primary source, parameters as override
         try:
