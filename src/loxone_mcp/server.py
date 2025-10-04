@@ -53,7 +53,7 @@ ERROR_VALIDATION_FAILED = "VALIDATION_FAILED"
 
 
 def create_error_response(
-    error_code: str, error_message: str, details: dict = None, context: dict = None
+    error_code: str, error_message: str, details: dict | None = None, context: dict | None = None
 ) -> dict:
     """
     Create a standardized error response for MCP tools.
@@ -78,7 +78,7 @@ def create_error_response(
     return response
 
 
-def create_success_response(data: dict, context: dict = None) -> dict:
+def create_success_response(data: dict, context: dict | None = None) -> dict:
     """
     Create a standardized success response for MCP tools.
 
@@ -108,13 +108,13 @@ device_manager: Optional["DeviceManager"] = None
 mcp = FastMCP("loxone-mcp-server")
 
 
-def main():
+def main_stdio():
     """Main entry point for the MCP server."""
     mcp.run()
 
 
 if __name__ == "__main__":
-    main()
+    main_stdio()
 
 
 @asynccontextmanager
@@ -173,7 +173,7 @@ async def server_lifespan():
 
 
 # Set the lifespan manager
-mcp.lifespan = server_lifespan
+# mcp.lifespan = server_lifespan
 
 
 async def get_or_create_session(

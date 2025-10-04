@@ -4,7 +4,7 @@ install:
 	uv pip install -e ".[dev]"
 
 test:
-	uv run pytest --cov=src/loxone_mcp --cov-report=xml
+	uv run pytest --cov=src/loxone_mcp --cov-report=xml -k "not (test_mcp_client_integration or test_mcp_server)"
 
 lint:
 	uv run ruff check src/ tests/

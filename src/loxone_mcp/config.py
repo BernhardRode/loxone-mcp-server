@@ -90,10 +90,10 @@ class LoxoneConfig:
         )
 
         return cls(
-            host=host,
+            host=host or "",
             port=port,
-            username=username,
-            password=password,
+            username=username or "",
+            password=password or "",
             token_persist_path=token_persist_path,
         )
 

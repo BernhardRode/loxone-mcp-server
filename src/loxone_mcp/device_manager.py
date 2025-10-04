@@ -1134,7 +1134,7 @@ class DeviceManager:
             }
 
         affected_devices = []
-        errors = []
+        errors: list[str] = []
 
         # Determine which devices to control based on action
         target_devices = []
