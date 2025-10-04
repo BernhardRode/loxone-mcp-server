@@ -42,9 +42,6 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      - name: Install Python 3.13
-        run: uv python install 3.13
-
       - name: Install dependencies
         if: ${{ steps.release.outputs.release_created }}
         run: uv sync --frozen
