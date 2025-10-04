@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.6](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.5...v0.3.6) (2025-10-04)
+
+
+### Bug Fixes
+
+* remove trests ([69e43e6](https://github.com/BernhardRode/loxone-mcp-server/commit/69e43e6ccaed9f2e11151173ee6f6ad48e1556ac))
+
 ## [0.3.5](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.4...v0.3.5) (2025-10-04)
 
 
