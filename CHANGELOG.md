@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.5](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.4...v0.3.5) (2025-10-04)
+
+
+### Bug Fixes
+
+* only pcython 3.13 ([c3c2dbc](https://github.com/BernhardRode/loxone-mcp-server/commit/c3c2dbc296510efbefce4998fc6af8150180967f))
+
 ## [0.3.4](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.3...v0.3.4) (2025-10-04)
 
 
