@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.10...v0.4.0) (2026-05-28)
+
+
+### Features
+
+* simplify server to stateless architecture ([d359e74](https://github.com/BernhardRode/loxone-mcp-server/commit/d359e7469e7fb25d8f8cec84a4bbed0111aaa94e))
+
+
+### Bug Fixes
+
+* remove invalid draft input and add workflow_dispatch trigger ([524d3ae](https://github.com/BernhardRode/loxone-mcp-server/commit/524d3ae876c3e78d4151e039ffba8d8d6b06746e))
+
 ## [0.3.10](https://github.com/BernhardRode/loxone-mcp-server/compare/v0.3.9...v0.3.10) (2025-10-04)
 
 
