@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -27,8 +28,6 @@ jobs:
         with:
           release-type: python
           token: ${{ secrets.GITHUB_TOKEN }}
-          # ✅ Create draft releases first so we can upload assets
-          draft: true
 
       # UV build steps - only run when a new release is created
       - name: Checkout code
