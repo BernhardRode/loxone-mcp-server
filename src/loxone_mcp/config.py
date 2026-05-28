@@ -29,6 +29,24 @@ class LoxoneConfig:
     token_persist_path: str = "./loxone_token.json"
 
     @classmethod
+    def xdg_config_path(cls) -> Path:
+        """Return the XDG config file path: $XDG_CONFIG_HOME/loxone-mcp/config.json."""
+        xdg = os.getenv("XDG_CONFIG_HOME", str(Path.home() / ".config"))
+        return Path(xdg) / "loxone-mcp" / "config.json"
+
+    @classmethod
+    def from_xdg(cls) -> Optional["LoxoneConfig"]:
+        """Load configuration from XDG config directory. Returns None if not found."""
+        path = cls.xdg_config_path()
+        if not path.exists():
+            return None
+        try:
+            return cls.from_file(str(path))
+        except (ValueError, json.JSONDecodeError) as e:
+            logger.warning(f"Invalid XDG config at {path}: {e}")
+            return None
+
+    @classmethod
     def from_env(cls) -> "LoxoneConfig":
         """
         Load configuration from environment variables.

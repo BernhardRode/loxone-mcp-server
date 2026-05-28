@@ -46,7 +46,8 @@ dev = [
 ]
 
 [project.scripts]
-loxone-mcp-server = "loxone_mcp.simple_server:main"
+loxone-mcp-server = "loxone_mcp.server:main"
+loxone-mcp-server-http = "loxone_mcp.server:main"
 
 [build-system]
 requires = ["hatchling"]

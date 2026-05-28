@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "loxone": {
+      "command": "uv",
+      "args": ["run", "loxone-mcp-server"]
+    }
+  }
+}

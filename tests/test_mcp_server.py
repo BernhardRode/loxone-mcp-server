@@ -13,7 +13,7 @@ from pathlib import Path
 @pytest.fixture
 def server_script():
     """Path to the MCP server script."""
-    return Path("src/loxone_mcp/simple_server.py")
+    return Path("src/loxone_mcp/server.py")
 
 
 @pytest.fixture
@@ -85,7 +85,7 @@ async def test_connection_failure_handling(mock_connect, server_script, mock_cre
 @pytest.mark.asyncio
 async def test_successful_connection_mock(server_script, mock_credentials):
     """Test successful connection and structure retrieval with mocking."""
-    with patch("src.loxone_mcp.simple_server.LoxoneClient") as mock_client_class:
+    with patch("src.loxone_mcp.server.LoxoneClient") as mock_client_class:
         # Setup mock client instance
         mock_client = AsyncMock()
         mock_client_class.return_value = mock_client

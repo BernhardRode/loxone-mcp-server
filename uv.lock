@@ -724,7 +724,7 @@ wheels = [
 
 [[package]]
 name = "loxone-mcp-server"
-version = "0.3.7"
+version = "0.3.10"
 source = { editable = "." }
 dependencies = [
     { name = "black" },

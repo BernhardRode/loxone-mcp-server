@@ -7,6 +7,7 @@ tts
 venv
 .venv
 hass.py
+.env
 
 .idea
 *.yaml

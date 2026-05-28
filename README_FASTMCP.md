@@ -62,7 +62,7 @@ uv run python scripts/demo_client.py
 
 ## 🏗️ Architecture
 
-### FastMCP Server (`simple_server.py`)
+### FastMCP Server (`server.py`)
 
 The server provides two main MCP tools:
 
@@ -159,7 +159,7 @@ Gets the current state of a specific device.
 
 ```
 src/loxone_mcp/
-├── simple_server.py      # FastMCP server implementation
+├── server.py      # FastMCP server implementation
 ├── client.py            # FastMCP client implementation
 ├── loxone_client.py     # Loxone WebSocket client
 ├── config.py            # Configuration management
@@ -192,7 +192,7 @@ scripts/
 
 ### Adding New Tools
 
-To add new MCP tools, edit `simple_server.py`:
+To add new MCP tools, edit `server.py`:
 
 ```python
 @mcp.tool()
